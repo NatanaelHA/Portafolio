@@ -23,7 +23,7 @@ const Nav = () => {
             Natanael<span className='text-blue-600'>.</span>
           </span>
           <span className='text-[10px] text-slate-400 font-bold uppercase tracking-widest'>
-            Ingeniero
+            Full Stack · Cloud
           </span>
         </div>
       </Link>

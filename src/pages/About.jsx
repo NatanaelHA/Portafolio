@@ -1,10 +1,10 @@
 const About = () => {
   const education = [
     {
-      period: '2024 - Presente',
+      period: '2024 - 2025',
       title: 'Ingeniería en Informática',
       place: 'Duoc UC - Plaza Norte',
-      desc: 'Especialización profesional y liderazgo de proyectos.',
+      desc: 'Titulado · Especialización profesional y liderazgo de proyectos.',
     },
     {
       period: '2019 - 2022',
@@ -32,10 +32,9 @@ const About = () => {
           <span className='text-blue-600'>desarrollo.</span>
         </h1>
         <p className='text-slate-600 text-lg max-w-2xl mx-auto leading-relaxed'>
-          Soy Natanael, estudiante de Ingeniería en Informática apasionado por
-          el aprendizaje continuo. Mi camino en el desarrollo comenzó en 2019 y
-          desde entonces no he dejado de crecer, buscando siempre nuevos
-          desafíos que me permitan aportar valor real.
+          Soy Natanael, Ingeniero en Informática y desarrollador full stack. Mi
+          recorrido comenzó en 2019 y hoy combina experiencia profesional,
+          desarrollo móvil y arquitecturas cloud en AWS y Google Cloud.
         </p>
       </div>
 
@@ -71,18 +70,18 @@ const About = () => {
                 <div className='w-2 h-2 rounded-full bg-green-500'></div>
                 <span className='text-slate-700 text-sm'>
                   <span className='font-bold text-slate-900 underline underline-offset-2'>
-                    Full Stack:
+                    Metodologías Ágiles:
                   </span>{' '}
-                  Desarrollo web completo — Duoc UC (2022)
+                  Certificación profesional
                 </span>
               </li>
               <li className='flex items-center gap-3'>
                 <div className='w-2 h-2 rounded-full bg-green-500'></div>
                 <span className='text-slate-700 text-sm'>
                   <span className='font-bold text-slate-900 underline underline-offset-2'>
-                    Inglés:
+                    Bases de Datos:
                   </span>{' '}
-                  Nivel intermedio — Duoc UC
+                  Curso de Base de Datos Aplicada
                 </span>
               </li>
             </ul>
@@ -94,10 +93,9 @@ const About = () => {
           </h2>
           <div className='bg-slate-50 p-6 rounded-2xl border border-slate-100'>
             <p className='text-slate-600 text-sm leading-relaxed'>
-              Busco oportunidades que me permitan aplicar mis conocimientos en
-              entornos desafiantes y seguir creciendo profesionalmente, dentro
-              de una organización que valore la estabilidad y el desarrollo a
-              largo plazo.
+              Busco aportar en equipos donde pueda conectar producto, código e
+              infraestructura, construyendo soluciones útiles y sostenibles a
+              largo plazo sin dejar de aprender.
             </p>
           </div>
 

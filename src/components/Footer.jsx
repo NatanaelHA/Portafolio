@@ -9,7 +9,7 @@ const Footer = () => {
             <p className="font-black text-2xl text-slate-800 tracking-tighter">
               NATANAEL<span className="text-blue-600 text-3xl">.</span>
             </p>
-            <p className="text-slate-500 text-sm mt-1">Ingeniero en Informática</p>
+            <p className="text-slate-500 text-sm mt-1">Full Stack Developer · AWS & GCP</p>
           </div>
 
           {/* Centro: Información de contacto rápida */}
@@ -25,6 +25,10 @@ const Footer = () => {
             <a href="https://www.linkedin.com/in/natanael-huenullan-acevedo-3140b0239" target="_blank" rel="noreferrer" className="contact-item flex items-center gap-2 hover:text-blue-600 transition-colors">
               <span className="font-bold text-slate-800">LinkedIn:</span>
               natanael-huenullan-acevedo
+            </a>
+            <a href="https://github.com/NatanaelHA" target="_blank" rel="noreferrer" className="contact-item flex items-center gap-2 hover:text-blue-600 transition-colors">
+              <span className="font-bold text-slate-800">GitHub:</span>
+              NatanaelHA
             </a>
             <p className="flex items-center gap-2">
               <span className="font-bold text-slate-800">Ubicación:</span>

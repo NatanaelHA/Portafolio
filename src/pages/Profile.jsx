@@ -3,23 +3,23 @@ const Profile = () => {
     {
       category: 'Front-End & Mobile',
       items:
-        'React.js (Hooks, Redux), Angular, Ionic Framework, HTML5, CSS3, JavaScript (ES6+), Bootstrap, TailwindCSS',
+        'React.js, Next.js (SSR, API Routes, SPA), TypeScript, Angular, Ionic Framework, JavaScript, Tailwind CSS',
     },
     {
       category: 'Back-End & APIs',
-      items: 'Node.js, Express.js, APIs RESTful',
+      items: 'Node.js, Express.js, APIs RESTful, middlewares, microservicios y arquitectura orientada a eventos',
     },
     {
-      category: 'Bases de Datos & Cloud',
-      items: 'MySQL, Oracle, MongoDB, Firestore, Google Cloud Platform (GCP)',
+      category: 'AWS & Arquitectura Cloud',
+      items: 'Lambda, API Gateway, DynamoDB, Cognito, S3, SQS, SES, IAM, CloudWatch, AWS CDK y CI/CD',
     },
     {
-      category: 'QA & Testing',
-      items: 'Postman, Insomnia, Selenium IDE, Katalon Studio, JUnit, Cucumber',
+      category: 'Datos & Google Cloud',
+      items: 'Oracle PL/SQL, MySQL, MongoDB, Firestore, Cloud Run, BigQuery, Cloud Storage y Firebase',
     },
     {
-      category: 'Diseño & Prototipado',
-      items: 'Figma, Visily, Canva',
+      category: 'Calidad & Entrega',
+      items: 'Git, GitHub Actions, Jest, Postman, Insomnia, Katalon Studio, Selenium IDE y Figma',
     },
     {
       category: 'Habilidades Blandas',
@@ -41,7 +41,7 @@ const Profile = () => {
               Natanael Eusebio Huenullan Acevedo
             </h1>
             <p className='text-blue-600 font-medium mt-2'>
-              Ingeniero en Informática
+              Full Stack Developer
             </p>
 
             {/* Idioma destacado */}
@@ -53,13 +53,13 @@ const Profile = () => {
 
             <div className='mt-6 flex flex-wrap justify-center gap-2'>
               <span className='px-3 py-1 bg-slate-100 text-slate-600 text-[10px] font-bold rounded-md uppercase'>
+                AWS Cloud
+              </span>
+              <span className='px-3 py-1 bg-slate-100 text-slate-600 text-[10px] font-bold rounded-md uppercase'>
                 Full Stack
               </span>
               <span className='px-3 py-1 bg-slate-100 text-slate-600 text-[10px] font-bold rounded-md uppercase'>
-                UX/UI Design
-              </span>
-              <span className='px-3 py-1 bg-slate-100 text-slate-600 text-[10px] font-bold rounded-md uppercase'>
-                Mobile Dev
+                Mobile
               </span>
             </div>
           </div>
@@ -74,11 +74,10 @@ const Profile = () => {
               Sobre mí
             </h2>
             <p className='text-slate-600 leading-relaxed text-justify text-base md:text-lg'>
-              Estudiante de último año de Ingeniería en Informática con sólida
-              capacidad para liderar proyectos tecnológicos, resolver problemas
-              de manera eficiente y adaptarme a entornos colaborativos o
-              autónomos. Me especializo en desarrollo full stack con enfoque en
-              calidad, optimización y mejora continua.
+              Ingeniero en Informática y Analista Programador Computacional con
+              2 años de experiencia profesional en desarrollo full stack. Creo
+              aplicaciones web y móviles, backends e integraciones cloud con
+              foco en soluciones escalables, mantenibles y orientadas a eventos.
             </p>
           </div>
 
