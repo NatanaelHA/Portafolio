@@ -1,82 +1,8 @@
 import ProjectModal from '../components/projects/ProjectModal'
 import ProjectCard from '../components/projects/ProjectCard'
+import { projects } from '../data/projects'
 
 const Home = () => {
-  const projects = [
-    {
-      title: 'Gestor de Notas Cloud',
-      variant: 'aws',
-      category: 'Proyecto destacado · AWS',
-      desc: 'Aplicación full stack para gestionar notas y archivos, construida sobre una arquitectura serverless, segura y orientada a eventos.',
-      stack:
-        'Next.js 16 · TypeScript · AWS Lambda · API Gateway · DynamoDB · Cognito · S3 · SQS · SES · GitHub Actions',
-      liveUrl: 'https://notas-app-one-bice.vercel.app',
-      featured: true,
-      architecture: ['Next.js', 'Cognito', 'API Gateway', 'Lambda', 'DynamoDB'],
-      highlights: [
-        'Sesiones validadas server-side mediante Amazon Cognito y cookies.',
-        'Carga segura de adjuntos en S3 usando presigned URLs.',
-        'Notificaciones asíncronas con SQS, SES y Dead Letter Queue.',
-        'Despliegues automatizados mediante GitHub Actions.',
-      ],
-      images: [
-        '/projects/notas/portada.png',
-        '/projects/notas/mis-notas.png',
-        '/projects/notas/editor.png',
-        '/projects/notas/nota-creada.png',
-      ],
-    },
-    {
-      title: 'E-Commerce App',
-      variant: 'commerce',
-      category: 'Full Stack',
-      desc: 'Simulacion de una aplicación de comercio, con precios, mantenciones, carrito de compras y plataformas de pago integrados.',
-      stack: 'React · Node.js · MongoDB Atlas · Stripe · PayPal',
-      thumbnail: '/projects/ecomerce/e-comerce.png',
-      images: [
-        '/projects/ecomerce/img2.png',
-        '/projects/ecomerce/img1.png',
-        '/projects/ecomerce/img3.png',
-        '/projects/ecomerce/img4.png',
-        '/projects/ecomerce/img5.png',
-      ],
-    },
-    {
-      title: 'Dashboard de Administración',
-      variant: 'dashboard',
-      category: 'Frontend',
-      desc: 'Panel administrativo para tienda con métricas, gestión de usuarios y tablas',
-      stack: 'HTML · CSS · JavaScript',
-      thumbnail: '/projects/dashboard/dashboard.png',
-      images: [
-        '/projects/dashboard/dashboard.png',
-        '/projects/dashboard/img2.png',
-        '/projects/dashboard/img1.png',
-      ],
-    },
-    {
-      title: 'SmartRoute',
-      variant: 'route',
-      category: 'Mobile Full Stack · IA',
-      desc: 'App móvil optimizador de itinerarios. Incluye autenticacion, subscripción Plus, clima en tiempo real, estado de transporte público y navegación GPS. Las rutas son reordenadas por Gemini AI según proximidad, horarios y tipo de lugar.',
-      stack:
-        'Ionic 8 · Angular 21 · Node.js · Gemini AI · Google Maps · Firebase · Render',
-      thumbnail: '/projects/smartroute/SmartRoute.png',
-      images: [
-        '/projects/smartroute/SmartRoute.png',
-        '/projects/smartroute/img1.png',
-        '/projects/smartroute/img2.png',
-        '/projects/smartroute/img3.png',
-        '/projects/smartroute/img4.png',
-        '/projects/smartroute/img5.png',
-        '/projects/smartroute/img6.jpg',
-        '/projects/smartroute/img8.png',
-        '/projects/smartroute/img7.png',
-        '/projects/smartroute/img9.png',
-      ],
-    },
-  ]
-
   return (
     <div className='py-12 md:py-16 px-4'>
       {/* Hero Section */}
@@ -111,8 +37,7 @@ const Home = () => {
         ))}
       </div>
 
-      {/* Grid de Proyectos */}
-
+      {/* Grid de proyectos */}
       <div className='mx-auto grid max-w-6xl grid-cols-1 gap-8 md:grid-cols-2'>
         {projects.map((project) => (
           <ProjectCard key={project.title} project={project} />
@@ -133,11 +58,11 @@ const Home = () => {
               .getElementById('footer')
               .scrollIntoView({ behavior: 'smooth' })
             setTimeout(() => {
-              document.querySelectorAll('.contact-item').forEach((el) => {
-                el.classList.add('animate-highlight')
-                el.addEventListener(
+              document.querySelectorAll('.contact-item').forEach((element) => {
+                element.classList.add('animate-highlight')
+                element.addEventListener(
                   'animationend',
-                  () => el.classList.remove('animate-highlight'),
+                  () => element.classList.remove('animate-highlight'),
                   { once: true },
                 )
               })
@@ -149,7 +74,6 @@ const Home = () => {
         </button>
       </div>
 
-      {/* Modal */}
       <ProjectModal />
     </div>
   )

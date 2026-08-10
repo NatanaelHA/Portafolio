@@ -7,6 +7,7 @@ const ProjectGallery = ({
   projectTitle,
   frameClass,
   dotClass,
+  compact = false,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [dragOffset, setDragOffset] = useState(0)
@@ -70,7 +71,11 @@ const ProjectGallery = ({
         onPointerUp={finishDragging}
         onPointerCancel={cancelDragging}
         className={`
-          relative flex h-[60vh] min-h-[280px] max-h-[680px]
+          relative flex ${
+            compact
+              ? 'h-[45vh] min-h-[240px] max-h-[500px]'
+              : 'h-[60vh] min-h-[280px] max-h-[680px]'
+          }
           touch-pan-y select-none items-center justify-center overflow-hidden
           rounded-2xl border bg-slate-100 cursor-grab active:cursor-grabbing
           ${frameClass}

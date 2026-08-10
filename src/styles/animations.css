@@ -27,8 +27,13 @@
     animation: highlight 1.2s ease-in-out;
   }
 
-  .animate-blink {
-    animation: blink 3s infinite;
+  .animate-inspector-search {
+    animation: inspectorSearch 4.2s ease-in-out infinite;
+    transform-origin: 50% 85%;
+  }
+
+  .animate-inspector-shadow {
+    animation: inspectorShadow 4.2s ease-in-out infinite;
   }
 
   @keyframes fadeIn {
@@ -117,15 +122,66 @@
     }
   }
 
-  @keyframes blink {
+  @keyframes inspectorSearch {
     0%,
-    90%,
+    10%,
     100% {
-      height: 8px;
+      transform: translateX(0) rotate(0) scaleX(1);
     }
 
-    95% {
-      height: 1px;
+    30% {
+      transform: translateX(-48px) rotate(-7deg) scaleX(1);
+    }
+
+    45% {
+      transform: translateX(0) rotate(0) scaleX(1);
+    }
+
+    52% {
+      transform: translateX(0) rotate(0) scaleX(-1);
+    }
+
+    75% {
+      transform: translateX(48px) rotate(-7deg) scaleX(-1);
+    }
+
+    90% {
+      transform: translateX(0) rotate(0) scaleX(-1);
+    }
+
+    96% {
+      transform: translateX(0) rotate(0) scaleX(1);
+    }
+  }
+
+  @keyframes inspectorShadow {
+    0%,
+    10%,
+    100% {
+      opacity: 0.45;
+      transform: translateX(-50%) scaleX(0.8);
+    }
+
+    30% {
+      opacity: 0.65;
+      transform: translateX(calc(-50% - 48px)) scaleX(1.1);
+    }
+
+    45%,
+    52% {
+      opacity: 0.45;
+      transform: translateX(-50%) scaleX(0.8);
+    }
+
+    75% {
+      opacity: 0.65;
+      transform: translateX(calc(-50% + 48px)) scaleX(1.1);
+    }
+
+    90%,
+    96% {
+      opacity: 0.45;
+      transform: translateX(-50%) scaleX(0.8);
     }
   }
 
@@ -137,7 +193,8 @@
     .animate-modal-overlay-out,
     .animate-modal-content-out,
     .animate-highlight,
-    .animate-blink {
+    .animate-inspector-search,
+    .animate-inspector-shadow {
       animation: none;
     }
   }
