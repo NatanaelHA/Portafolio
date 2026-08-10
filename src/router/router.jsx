@@ -15,7 +15,7 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: 'about', // Se carga cuando entras a /profile
+        path: 'about', // Se carga cuando entras a /about
         element: <About />,
       },
       {

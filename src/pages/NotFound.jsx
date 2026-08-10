@@ -8,7 +8,6 @@ const NotFound = () => {
         className='absolute inset-0 opacity-20'
         style={{
           backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)',
-          size: '40px 40px',
           backgroundSize: '40px 40px',
         }}
       ></div>
@@ -86,21 +85,6 @@ const NotFound = () => {
           <span className='text-xl'>⟵</span> Volver al Inicio
         </Link>
       </div>
-
-      {/* CSS Extra para animaciones */}
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-        @keyframes blink {
-          0%, 90%, 100% { height: 8px; }
-          95% { height: 1px; }
-        }
-        .animate-blink {
-          animation: blink 3s infinite;
-        }
-      `,
-        }}
-      />
     </div>
   )
 }

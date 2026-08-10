@@ -1,12 +1,11 @@
-import { useState } from 'react'
-import ProjectModal from './Modal'
+import ProjectModal from '../components/projects/ProjectModal'
+import ProjectCard from '../components/projects/ProjectCard'
 
 const Home = () => {
-  const [selectedProject, setSelectedProject] = useState(null)
-
   const projects = [
     {
       title: 'Gestor de Notas Cloud',
+      variant: 'aws',
       category: 'Proyecto destacado · AWS',
       desc: 'Aplicación full stack para gestionar notas y archivos, construida sobre una arquitectura serverless, segura y orientada a eventos.',
       stack:
@@ -20,10 +19,16 @@ const Home = () => {
         'Notificaciones asíncronas con SQS, SES y Dead Letter Queue.',
         'Despliegues automatizados mediante GitHub Actions.',
       ],
-      images: [],
+      images: [
+        '/projects/notas/portada.png',
+        '/projects/notas/mis-notas.png',
+        '/projects/notas/editor.png',
+        '/projects/notas/nota-creada.png',
+      ],
     },
     {
       title: 'E-Commerce App',
+      variant: 'commerce',
       category: 'Full Stack',
       desc: 'Simulacion de una aplicación de comercio, con precios, mantenciones, carrito de compras y plataformas de pago integrados.',
       stack: 'React · Node.js · MongoDB Atlas · Stripe · PayPal',
@@ -38,6 +43,7 @@ const Home = () => {
     },
     {
       title: 'Dashboard de Administración',
+      variant: 'dashboard',
       category: 'Frontend',
       desc: 'Panel administrativo para tienda con métricas, gestión de usuarios y tablas',
       stack: 'HTML · CSS · JavaScript',
@@ -50,6 +56,7 @@ const Home = () => {
     },
     {
       title: 'SmartRoute',
+      variant: 'route',
       category: 'Mobile Full Stack · IA',
       desc: 'App móvil optimizador de itinerarios. Incluye autenticacion, subscripción Plus, clima en tiempo real, estado de transporte público y navegación GPS. Las rutas son reordenadas por Gemini AI según proximidad, horarios y tipo de lugar.',
       stack:
@@ -82,8 +89,8 @@ const Home = () => {
           <span className='text-blue-600'>código.</span>
         </h1>
         <p className='text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed'>
-          Diseño productos web y móviles conectando interfaces claras,
-          backends mantenibles y servicios cloud preparados para crecer.
+          Diseño productos web y móviles conectando interfaces claras, backends
+          mantenibles y servicios cloud preparados para crecer.
         </p>
       </div>
 
@@ -94,7 +101,10 @@ const Home = () => {
           ['AWS + GCP', 'Experiencia cloud'],
           ['Web + Mobile', 'Productos end-to-end'],
         ].map(([value, label]) => (
-          <div key={label} className='rounded-2xl border border-slate-200 bg-white p-4 text-center shadow-sm'>
+          <div
+            key={label}
+            className='rounded-2xl border border-slate-200 bg-white p-4 text-center shadow-sm'
+          >
             <p className='font-black text-slate-900 text-lg'>{value}</p>
             <p className='text-[11px] text-slate-500 mt-1'>{label}</p>
           </div>
@@ -102,87 +112,10 @@ const Home = () => {
       </div>
 
       {/* Grid de Proyectos */}
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-8 mx-auto max-w-6xl'>
+
+      <div className='mx-auto grid max-w-6xl grid-cols-1 gap-8 md:grid-cols-2'>
         {projects.map((project) => (
-          <div
-            key={project.title}
-            className={`group flex flex-col p-6 rounded-3xl transition-all duration-300 ${
-              project.featured
-                ? 'md:col-span-2 bg-slate-950 text-white border border-slate-800 shadow-2xl shadow-blue-950/20'
-                : 'bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:border-blue-400'
-            }`}
-          >
-            {/* Category badge */}
-            <div className='mb-3'>
-              <span className={`text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full ${project.featured ? 'text-blue-300 bg-blue-500/10' : 'text-blue-600 bg-blue-50'}`}>
-                {project.category}
-              </span>
-            </div>
-
-            {/* Título */}
-            <h3 className={`text-xl font-bold mb-4 transition-colors ${project.featured ? 'text-white md:text-3xl' : 'text-slate-800 group-hover:text-blue-600'}`}>
-              {project.title}
-            </h3>
-
-            {/* Imagen */}
-            {project.featured ? (
-              <div className='rounded-2xl border border-white/10 bg-white/5 p-5 mb-5 overflow-hidden'>
-                <p className='text-[10px] uppercase tracking-[0.2em] text-slate-400 mb-4'>Arquitectura principal</p>
-                <div className='flex items-center gap-2 overflow-x-auto pb-2'>
-                  {project.architecture.map((service, index) => (
-                    <div key={service} className='flex items-center gap-2 shrink-0'>
-                      <span className='px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-xs font-bold text-slate-200'>{service}</span>
-                      {index < project.architecture.length - 1 && <span className='text-blue-400'>→</span>}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ) : <div className='w-full aspect-video rounded-2xl overflow-hidden mb-4 bg-slate-100'>
-              {project.thumbnail ? (
-                <img
-                  src={project.thumbnail}
-                  alt={project.title}
-                  className='w-full h-full object-cover'
-                />
-              ) : (
-                <div className='w-full h-full flex items-center justify-center text-slate-400 text-xs font-medium'>
-                  📷 Sin imagen
-                </div>
-              )}
-            </div>}
-
-            {/* Descripción */}
-            <p className={`text-sm leading-relaxed mb-6 grow ${project.featured ? 'text-slate-300 max-w-3xl' : 'text-slate-500'}`}>
-              {project.desc}
-            </p>
-
-            {project.highlights && (
-              <div className='grid sm:grid-cols-2 gap-2 mb-6'>
-                {project.highlights.map((item) => (
-                  <p key={item} className='text-xs text-slate-300 flex gap-2'>
-                    <span className='text-blue-400'>✓</span>{item}
-                  </p>
-                ))}
-              </div>
-            )}
-
-            {/* Botón */}
-            <div className='flex flex-col sm:flex-row gap-3'>
-              {project.liveUrl && (
-                <a href={project.liveUrl} target='_blank' rel='noreferrer' className='flex items-center justify-center gap-2 py-3 px-5 bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm rounded-xl transition-all'>
-                  Abrir aplicación <span aria-hidden='true'>↗</span>
-                </a>
-              )}
-              {!project.featured && (
-                <button
-                  onClick={() => setSelectedProject(project)}
-                  className='flex items-center justify-center gap-2 w-full py-3 bg-slate-50 text-slate-700 font-bold text-sm rounded-xl group-hover:bg-blue-600 group-hover:text-white transition-all'
-                >
-                  Ver proyecto <span aria-hidden='true'>→</span>
-                </button>
-              )}
-            </div>
-          </div>
+          <ProjectCard key={project.title} project={project} />
         ))}
       </div>
 
@@ -217,11 +150,7 @@ const Home = () => {
       </div>
 
       {/* Modal */}
-      <ProjectModal
-        key={selectedProject?.title}
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
-      />
+      <ProjectModal />
     </div>
   )
 }

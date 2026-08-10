@@ -1,0 +1,144 @@
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-modal-overlay {
+    animation: modalOverlay 0.2s ease-out;
+  }
+
+  .animate-modal-content {
+    animation: modalContent 0.25s ease-out;
+  }
+
+  .animate-gallery-image {
+    animation: galleryImageEnter 0.3s ease-out;
+  }
+
+  .animate-modal-overlay-out {
+    animation: modalOverlayOut 0.2s ease-in forwards;
+  }
+
+  .animate-modal-content-out {
+    animation: modalContentOut 0.2s ease-in forwards;
+  }
+
+  .animate-highlight {
+    animation: highlight 1.2s ease-in-out;
+  }
+
+  .animate-blink {
+    animation: blink 3s infinite;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes modalOverlay {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes modalContent {
+    from {
+      opacity: 0;
+      transform: scale(0.95) translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes galleryImageEnter {
+    from {
+      opacity: 0;
+      filter: blur(3px);
+    }
+
+    to {
+      opacity: 1;
+      filter: blur(0);
+    }
+  }
+
+  @keyframes modalOverlayOut {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes modalContentOut {
+    from {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    to {
+      opacity: 0;
+      transform: scale(0.97) translateY(8px);
+    }
+  }
+
+  @keyframes highlight {
+    0%,
+    100% {
+      background-color: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 0;
+    }
+
+    30%,
+    70% {
+      background-color: #bfdbfe;
+      border-radius: 8px;
+      box-shadow: 0 0 0 2px #2563eb;
+      padding: 4px 8px;
+    }
+  }
+
+  @keyframes blink {
+    0%,
+    90%,
+    100% {
+      height: 8px;
+    }
+
+    95% {
+      height: 1px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in,
+    .animate-modal-overlay,
+    .animate-modal-content,
+    .animate-gallery-image,
+    .animate-modal-overlay-out,
+    .animate-modal-content-out,
+    .animate-highlight,
+    .animate-blink {
+      animation: none;
+    }
+  }
+}
