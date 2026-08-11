@@ -4,6 +4,7 @@ import inspectorMascot from '../assets/mascot/inspector_mascot.svg'
 const NotFound = () => {
   return (
     <div className='relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-slate-900 text-white'>
+      {/* Fondo decorativo */}
       <div
         aria-hidden='true'
         className='absolute inset-0 opacity-20'
@@ -13,6 +14,7 @@ const NotFound = () => {
         }}
       />
 
+      {/* Código de error */}
       <h1 className='relative text-8xl font-black tracking-tighter text-slate-800 animate-pulse md:text-9xl'>
         404
         <span
@@ -23,6 +25,7 @@ const NotFound = () => {
         </span>
       </h1>
 
+      {/* Mascota animada */}
       <div
         aria-label='Mascota inspectora buscando la página'
         className='relative my-4 h-44 w-64'
@@ -41,6 +44,7 @@ const NotFound = () => {
         />
       </div>
 
+      {/* Mensaje y regreso al inicio */}
       <div className='z-10 px-6 text-center'>
         <h2 className='mb-4 text-2xl font-bold uppercase tracking-widest text-blue-400 md:text-4xl'>
           ¡Te has perdido!

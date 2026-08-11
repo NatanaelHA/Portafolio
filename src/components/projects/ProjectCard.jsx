@@ -1,53 +1,12 @@
-import { useRef } from 'react'
+import useProjectCardEffect from '../../hooks/useProjectCardEffect'
 import useProjectModalStore from '../../store/useProjectModalStore'
 import { getProjectTheme } from './projectThemes'
 
 const ProjectCard = ({ project }) => {
-  const cardBounds = useRef(null)
   const openProject = useProjectModalStore((state) => state.openProject)
   const theme = getProjectTheme(project.variant).card
-
-  const registerCardBounds = (event) => {
-    cardBounds.current = event.currentTarget.getBoundingClientRect()
-  }
-
-  const updateCardEffect = (event) => {
-    const card = event.currentTarget
-    const bounds = cardBounds.current || card.getBoundingClientRect()
-
-    const pointerX = event.clientX - bounds.left
-    const pointerY = event.clientY - bounds.top
-
-    card.style.setProperty('--mouse-x', `${pointerX}px`)
-    card.style.setProperty('--mouse-y', `${pointerY}px`)
-
-    const reducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)',
-    ).matches
-
-    if (event.pointerType === 'touch' || reducedMotion) return
-
-    const rotateY = (pointerX / bounds.width - 0.5) * 6
-    const rotateX = (pointerY / bounds.height - 0.5) * -6
-
-    card.style.transform = `
-    perspective(900px)
-    translateY(0)
-    rotateX(${rotateX}deg)
-    rotateY(${rotateY}deg)
-  `
-  }
-
-  const resetCardEffect = (event) => {
-    event.currentTarget.style.transform = `
-    perspective(900px)
-    translateY(0)
-    rotateX(0deg)
-    rotateY(0deg)
-  `
-
-    cardBounds.current = null
-  }
+  const { registerCardBounds, updateCardEffect, resetCardEffect } =
+    useProjectCardEffect()
 
   return (
     <article
@@ -79,6 +38,7 @@ const ProjectCard = ({ project }) => {
         className='pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100'
       />
 
+      {/* Identidad del proyecto */}
       <header className='mb-4'>
         <span
           className={`
@@ -95,6 +55,7 @@ const ProjectCard = ({ project }) => {
         </h3>
       </header>
 
+      {/* Vista previa */}
       <div className='mb-5 aspect-video overflow-hidden rounded-2xl bg-slate-900/5'>
         {project.thumbnail ? (
           <img
@@ -123,6 +84,7 @@ const ProjectCard = ({ project }) => {
         {project.stack}
       </p>
 
+      {/* Acciones */}
       <div className='flex flex-col gap-3 sm:flex-row'>
         <button
           type='button'

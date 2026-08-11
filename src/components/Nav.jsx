@@ -1,11 +1,11 @@
 import { NavLink, Link } from 'react-router'
 
 const Nav = () => {
-  // Clase base para los links normales
+  // Estilos compartidos por los enlaces
   const linkStyles =
     'font-bold text-xs sm:text-sm md:text-base transition-colors'
 
-  // Función para manejar el estado activo
+  // Resalta la ruta activa
   const activeControl = ({ isActive }) =>
     isActive
       ? `${linkStyles} text-blue-600`
@@ -35,7 +35,7 @@ const Nav = () => {
         </NavLink>
 
         <NavLink to='/about' className={activeControl}>
-          Quién Soy
+          Trayectoria
         </NavLink>
 
         <NavLink
@@ -48,7 +48,7 @@ const Nav = () => {
             }`
           }
         >
-          Ver Perfil
+          Sobre mí
         </NavLink>
       </div>
     </nav>

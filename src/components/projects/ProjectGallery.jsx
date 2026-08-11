@@ -1,6 +1,4 @@
-import { useRef, useState } from 'react'
-
-const SWIPE_DISTANCE = 50
+import useProjectGallery from '../../hooks/useProjectGallery'
 
 const ProjectGallery = ({
   images = [],
@@ -9,58 +7,25 @@ const ProjectGallery = ({
   dotClass,
   compact = false,
 }) => {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [dragOffset, setDragOffset] = useState(0)
-  const dragStart = useRef(null)
+  const {
+    currentIndex,
+    dragOffset,
+    showPreviousImage,
+    showNextImage,
+    selectImage,
+    startDragging,
+    dragImage,
+    finishDragging,
+    cancelDragging,
+  } = useProjectGallery(images.length)
 
+  // Mantiene un espacio visual cuando el proyecto no tiene capturas
   if (images.length === 0) {
     return (
       <div className='flex aspect-video items-center justify-center rounded-2xl bg-slate-100 text-xs font-medium text-slate-400'>
         📷 Sin imágenes disponibles
       </div>
     )
-  }
-
-  const showPreviousImage = () => {
-    setCurrentIndex((index) => (index === 0 ? images.length - 1 : index - 1))
-  }
-
-  const showNextImage = () => {
-    setCurrentIndex((index) => (index === images.length - 1 ? 0 : index + 1))
-  }
-
-  const startDragging = (event) => {
-    if (images.length < 2 || event.target.closest('button')) return
-
-    dragStart.current = event.clientX
-    event.currentTarget.setPointerCapture(event.pointerId)
-  }
-
-  const dragImage = (event) => {
-    if (dragStart.current === null) return
-
-    setDragOffset(event.clientX - dragStart.current)
-  }
-
-  const finishDragging = (event) => {
-    if (dragStart.current === null) return
-
-    const distance = event.clientX - dragStart.current
-
-    if (distance <= -SWIPE_DISTANCE) showNextImage()
-    if (distance >= SWIPE_DISTANCE) showPreviousImage()
-
-    dragStart.current = null
-    setDragOffset(0)
-
-    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
-      event.currentTarget.releasePointerCapture(event.pointerId)
-    }
-  }
-
-  const cancelDragging = () => {
-    dragStart.current = null
-    setDragOffset(0)
   }
 
   return (
@@ -116,6 +81,7 @@ const ProjectGallery = ({
         )}
       </div>
 
+      {/* Indicadores de imagen */}
       {images.length > 1 && (
         <div className='mt-4 flex justify-center gap-2'>
           {images.map((image, index) => (
@@ -124,7 +90,7 @@ const ProjectGallery = ({
               aria-label={`Ver imagen ${index + 1} de ${images.length}`}
               aria-current={index === currentIndex ? 'true' : undefined}
               key={image}
-              onClick={() => setCurrentIndex(index)}
+              onClick={() => selectImage(index)}
               className='group flex h-6 w-6 items-center justify-center rounded-full'
             >
               <span
