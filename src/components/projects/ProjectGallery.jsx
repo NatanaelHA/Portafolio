@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import useProjectGallery from '../../hooks/useProjectGallery'
 import { getProjectGallerySrcSet } from '../../utils/getProjectImageSrcSet'
 import { GALLERY_SIZES } from '../../utils/imageSizes'
@@ -9,6 +10,8 @@ const ProjectGallery = ({
   dotClass,
   compact = false,
 }) => {
+  const [loadedImage, setLoadedImage] = useState(null)
+
   const {
     currentIndex,
     dragOffset,
@@ -32,6 +35,7 @@ const ProjectGallery = ({
 
   const currentImage = images[currentIndex]
   const currentImageSrcSet = getProjectGallerySrcSet(currentImage)
+  const isCurrentImageLoaded = loadedImage === currentImage
 
   return (
     <div>
@@ -51,6 +55,13 @@ const ProjectGallery = ({
           ${frameClass}
         `}
       >
+        {!isCurrentImageLoaded && (
+          <div
+            aria-hidden='true'
+            className='pointer-events-none absolute inset-0 z-10 animate-pulse bg-slate-200'
+          />
+        )}
+
         <img
           key={currentImage}
           src={currentImage}
@@ -58,6 +69,7 @@ const ProjectGallery = ({
           sizes={GALLERY_SIZES}
           alt={`${projectTitle} - imagen ${currentIndex + 1}`}
           draggable='false'
+          onLoad={() => setLoadedImage(currentImage)}
           onError={(event) => {
             event.currentTarget.onerror = null
             event.currentTarget.removeAttribute('srcset')
