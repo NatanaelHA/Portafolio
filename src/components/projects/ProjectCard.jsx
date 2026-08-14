@@ -1,12 +1,27 @@
+import { useState } from 'react'
 import useProjectCardEffect from '../../hooks/useProjectCardEffect'
 import useProjectModalStore from '../../store/useProjectModalStore'
+import getOptimizedImageSrcSet from '../../utils/getOptimizedImageSrcSet'
 import { getProjectTheme } from './projectThemes'
 
 const ProjectCard = ({ project }) => {
+  // Estado y acciones
+  const [isThumbnailLoaded, setIsThumbnailLoaded] = useState(false)
   const openProject = useProjectModalStore((state) => state.openProject)
+
+  // Configuración visual
   const theme = getProjectTheme(project.variant).card
+  const thumbnailSrcSet = getOptimizedImageSrcSet(project.thumbnail)
+
+  // Interacciones del card
   const { registerCardBounds, updateCardEffect, resetCardEffect } =
     useProjectCardEffect()
+
+  const handleThumbnailError = (event) => {
+    event.currentTarget.onerror = null
+    event.currentTarget.removeAttribute('srcset')
+    event.currentTarget.src = project.thumbnail
+  }
 
   return (
     <article
@@ -56,24 +71,27 @@ const ProjectCard = ({ project }) => {
       </header>
 
       {/* Vista previa */}
-      <div className='mb-5 aspect-video overflow-hidden rounded-2xl bg-slate-900/5'>
-        {project.thumbnail ? (
-          <img
-            src={project.thumbnail}
-            alt={`Vista previa de ${project.title}`}
-            className='h-full w-full object-cover transition-transform duration-700 group-hover:scale-105'
+      <div className='relative mb-5 aspect-video overflow-hidden rounded-2xl bg-slate-900/5'>
+        {!isThumbnailLoaded && (
+          <div
+            aria-hidden='true'
+            className='absolute inset-0 animate-pulse bg-slate-200/60'
           />
-        ) : (
-          <div className='flex h-full flex-col items-center justify-center gap-3 p-6 text-center'>
-            <span className='text-4xl' aria-hidden='true'>
-              ☁
-            </span>
-
-            <span className='text-xs font-bold uppercase tracking-[0.18em] opacity-70'>
-              Arquitectura serverless
-            </span>
-          </div>
         )}
+
+        <img
+          src={project.thumbnail}
+          srcSet={thumbnailSrcSet}
+          sizes='(max-width: 767px) calc(100vw - 32px), 560px'
+          alt={`Vista previa de ${project.title}`}
+          loading='lazy'
+          decoding='async'
+          onLoad={() => setIsThumbnailLoaded(true)}
+          onError={handleThumbnailError}
+          className={`h-full w-full object-cover transition-[opacity,transform] duration-700 group-hover:scale-105 ${
+            isThumbnailLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+        />
       </div>
 
       <p className={`mb-6 grow text-sm leading-relaxed ${theme.description}`}>
