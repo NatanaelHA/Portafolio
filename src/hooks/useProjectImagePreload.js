@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { getProjectGallerySrcSet } from '../utils/getProjectImageSrcSet'
 import { GALLERY_SIZES } from '../utils/imageSizes'
 
@@ -30,24 +30,7 @@ const getGalleryQueue = (projects) => {
 }
 
 const useProjectImagePreload = (projects) => {
-  // Registra qué portadas de los cards ya terminaron de cargar.
-  const [settledThumbnails, setSettledThumbnails] = useState(() => new Set())
-
-  // ProjectCard ejecuta esta función al cargar o fallar su portada.
-  const registerSettledThumbnail = useCallback((thumbnail) => {
-    setSettledThumbnails((current) => {
-      // Evita contar dos veces la misma portada.
-      if (current.has(thumbnail)) return current
-      return new Set(current).add(thumbnail)
-    })
-  }, [])
-
-  // La precarga de galerías espera hasta que todos los cards hayan respondido.
-  const areThumbnailsReady = settledThumbnails.size === projects.length
-
   useEffect(() => {
-    if (!areThumbnailsReady) return
-
     // Permite detener el recorrido si Home se desmonta durante la precarga.
     let isCancelled = false
     const galleryQueue = getGalleryQueue(projects)
@@ -62,15 +45,22 @@ const useProjectImagePreload = (projects) => {
       }
     }
 
-    preloadQueueSequentially()
+    // Espera que la página inicial termine antes de solicitar las galerías.
+    const startPreloading = () => {
+      preloadQueueSequentially()
+    }
+
+    if (document.readyState === 'complete') {
+      startPreloading()
+    } else {
+      window.addEventListener('load', startPreloading, { once: true })
+    }
 
     return () => {
       isCancelled = true
+      window.removeEventListener('load', startPreloading)
     }
-  }, [areThumbnailsReady, projects])
-
-  // Home entrega esta función a cada ProjectCard.
-  return registerSettledThumbnail
+  }, [projects])
 }
 
 export default useProjectImagePreload
