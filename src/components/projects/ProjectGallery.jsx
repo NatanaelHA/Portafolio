@@ -1,5 +1,6 @@
 import useProjectGallery from '../../hooks/useProjectGallery'
 import { getProjectGallerySrcSet } from '../../utils/getProjectImageSrcSet'
+import { GALLERY_SIZES } from '../../utils/imageSizes'
 
 const ProjectGallery = ({
   images = [],
@@ -54,7 +55,7 @@ const ProjectGallery = ({
           key={currentImage}
           src={currentImage}
           srcSet={currentImageSrcSet}
-          sizes='(max-width: 767px) calc(100vw - 80px), 1088px'
+          sizes={GALLERY_SIZES}
           alt={`${projectTitle} - imagen ${currentIndex + 1}`}
           draggable='false'
           onError={(event) => {

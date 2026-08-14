@@ -2,6 +2,7 @@ import { useState } from 'react'
 import useProjectCardEffect from '../../hooks/useProjectCardEffect'
 import useProjectModalStore from '../../store/useProjectModalStore'
 import { getProjectThumbnailSrcSet } from '../../utils/getProjectImageSrcSet'
+import { THUMBNAIL_SIZES } from '../../utils/imageSizes'
 import { getProjectTheme } from './projectThemes'
 
 const ProjectCard = ({ project, onThumbnailSettled }) => {
@@ -83,7 +84,7 @@ const ProjectCard = ({ project, onThumbnailSettled }) => {
         <img
           src={project.thumbnail}
           srcSet={thumbnailSrcSet}
-          sizes='(max-width: 767px) calc(100vw - 32px), 560px'
+          sizes={THUMBNAIL_SIZES}
           alt={`Vista previa de ${project.title}`}
           loading='eager'
           fetchPriority='high'

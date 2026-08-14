@@ -1,73 +1,71 @@
 import { useCallback, useEffect, useState } from 'react'
 import { getProjectGallerySrcSet } from '../utils/getProjectImageSrcSet'
+import { GALLERY_SIZES } from '../utils/imageSizes'
 
-const GALLERY_SIZES = '(max-width: 767px) calc(100vw - 80px), 1088px'
+const DELAY_BETWEEN_IMAGES_MS = 100
+
+// Pausa la ejecución por "ms" milisegundos.
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+
+// Descarga una imagen en segundo plano (sin mostrarla) para que
+// quede guardada en la caché del navegador.
+const preloadImage = (imageUrl) =>
+  new Promise((resolve) => {
+    const image = new Image()
+    image.srcset = getProjectGallerySrcSet(imageUrl) ?? ''
+    image.sizes = GALLERY_SIZES
+    image.src = imageUrl
+    image.onload = resolve
+    image.onerror = resolve // un error no debe frenar la cola
+  })
+
+// Arma la lista de imágenes de galería, sin repetir las que ya son portada.
+const getGalleryQueue = (projects) => {
+  const thumbnails = new Set(projects.map((project) => project.thumbnail))
+  const allGalleryImages = projects.flatMap((project) => project.images ?? [])
+  const uniqueImages = new Set(
+    allGalleryImages.filter((url) => !thumbnails.has(url))
+  )
+  return [...uniqueImages]
+}
 
 const useProjectImagePreload = (projects) => {
-  // Guarda las rutas de las portadas que ya finalizaron su carga.
+  // Registra qué portadas de los cards ya terminaron de cargar.
   const [settledThumbnails, setSettledThumbnails] = useState(() => new Set())
 
-  // ProjectCard llama a esta función al cargar o fallar su portada.
+  // ProjectCard ejecuta esta función al cargar o fallar su portada.
   const registerSettledThumbnail = useCallback((thumbnail) => {
-    setSettledThumbnails((currentThumbnails) => {
-      // El Set impide contar dos veces una misma portada.
-      if (currentThumbnails.has(thumbnail)) return currentThumbnails
-
-      const nextThumbnails = new Set(currentThumbnails)
-      nextThumbnails.add(thumbnail)
-      return nextThumbnails
+    setSettledThumbnails((current) => {
+      // Evita contar dos veces la misma portada.
+      if (current.has(thumbnail)) return current
+      return new Set(current).add(thumbnail)
     })
   }, [])
 
-  // La segunda etapa espera hasta que todos los cards hayan respondido.
+  // La precarga de galerías espera hasta que todos los cards hayan respondido.
   const areThumbnailsReady = settledThumbnails.size === projects.length
 
   useEffect(() => {
-    if (!areThumbnailsReady) return undefined
+    if (!areThumbnailsReady) return
 
-    // Crea la cola con todas las galerías y elimina portadas o rutas repetidas.
-    const thumbnailUrls = new Set(projects.map((project) => project.thumbnail))
-    const galleryUrls = [
-      ...new Set(
-        projects
-          .flatMap((project) => project.images ?? [])
-          .filter((imageUrl) => !thumbnailUrls.has(imageUrl)),
-      ),
-    ]
-
-    let currentIndex = 0
-    let preloadTimer
+    // Permite detener el recorrido si Home se desmonta durante la precarga.
     let isCancelled = false
+    const galleryQueue = getGalleryQueue(projects)
 
-    // Procesa una sola imagen por turno para no competir con la página inicial.
-    const preloadNextImage = () => {
-      // Detiene el recorrido al desmontar el componente o terminar la cola.
-      if (isCancelled || currentIndex >= galleryUrls.length) return
-
-      const imageUrl = galleryUrls[currentIndex]
-      currentIndex += 1
-
-      // Esta imagen no se renderiza: fuerza su descarga y almacenamiento en caché.
-      const image = new Image()
-      image.srcset = getProjectGallerySrcSet(imageUrl) ?? ''
-      image.sizes = GALLERY_SIZES
-      image.src = imageUrl
-
-      // Éxito y error continúan la cola para que una imagen no bloquee las demás.
-      const continuePreloading = () => {
-        if (!isCancelled) preloadTimer = window.setTimeout(preloadNextImage, 100)
+    // Recorre la cola en orden, dejando una pausa breve entre descargas.
+    const preloadQueueSequentially = async () => {
+      for (const imageUrl of galleryQueue) {
+        if (isCancelled) return
+        await preloadImage(imageUrl)
+        if (isCancelled) return
+        await wait(DELAY_BETWEEN_IMAGES_MS)
       }
-
-      image.onload = continuePreloading
-      image.onerror = continuePreloading
     }
 
-    preloadNextImage()
+    preloadQueueSequentially()
 
-    // Cancela la siguiente iteración si Home deja de estar montado.
     return () => {
       isCancelled = true
-      window.clearTimeout(preloadTimer)
     }
   }, [areThumbnailsReady, projects])
 
