@@ -58,7 +58,7 @@ const ProjectGallery = ({
         {!isCurrentImageLoaded && (
           <div
             aria-hidden='true'
-            className='animate-image-skeleton pointer-events-none absolute inset-0 z-10'
+            className='pointer-events-none absolute inset-0 z-10 animate-pulse bg-slate-300'
           />
         )}
 
