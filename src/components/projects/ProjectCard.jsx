@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import useProjectCardEffect from '../../hooks/useProjectCardEffect'
 import useProjectModalStore from '../../store/useProjectModalStore'
-import getOptimizedImageSrcSet from '../../utils/getOptimizedImageSrcSet'
+import { getProjectThumbnailSrcSet } from '../../utils/getProjectImageSrcSet'
 import { getProjectTheme } from './projectThemes'
 
 const ProjectCard = ({ project }) => {
@@ -11,7 +11,7 @@ const ProjectCard = ({ project }) => {
 
   // Configuración visual
   const theme = getProjectTheme(project.variant).card
-  const thumbnailSrcSet = getOptimizedImageSrcSet(project.thumbnail)
+  const thumbnailSrcSet = getProjectThumbnailSrcSet(project.thumbnail)
 
   // Interacciones del card
   const { registerCardBounds, updateCardEffect, resetCardEffect } =

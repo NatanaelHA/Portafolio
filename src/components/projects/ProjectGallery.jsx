@@ -1,4 +1,5 @@
 import useProjectGallery from '../../hooks/useProjectGallery'
+import { getProjectGallerySrcSet } from '../../utils/getProjectImageSrcSet'
 
 const ProjectGallery = ({
   images = [],
@@ -28,6 +29,9 @@ const ProjectGallery = ({
     )
   }
 
+  const currentImage = images[currentIndex]
+  const currentImageSrcSet = getProjectGallerySrcSet(currentImage)
+
   return (
     <div>
       <div
@@ -47,10 +51,17 @@ const ProjectGallery = ({
         `}
       >
         <img
-          key={images[currentIndex]}
-          src={images[currentIndex]}
+          key={currentImage}
+          src={currentImage}
+          srcSet={currentImageSrcSet}
+          sizes='(max-width: 767px) calc(100vw - 80px), 1088px'
           alt={`${projectTitle} - imagen ${currentIndex + 1}`}
           draggable='false'
+          onError={(event) => {
+            event.currentTarget.onerror = null
+            event.currentTarget.removeAttribute('srcset')
+            event.currentTarget.src = currentImage
+          }}
           style={{ transform: `translateX(${dragOffset}px)` }}
           className={`h-auto max-h-full w-auto max-w-full object-contain animate-gallery-image ${
             dragOffset === 0

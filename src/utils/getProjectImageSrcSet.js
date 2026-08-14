@@ -1,4 +1,5 @@
-const IMAGE_WIDTHS = [480, 800, 1200]
+const THUMBNAIL_WIDTHS = [480, 800, 1200]
+const GALLERY_WIDTHS = [640, 1200, 1800]
 const IMAGE_QUALITY = 75
 
 const createNetlifyImageUrl = (imageUrl, width) => {
@@ -11,12 +12,16 @@ const createNetlifyImageUrl = (imageUrl, width) => {
   return `/.netlify/images?${params.toString()}`
 }
 
-const getOptimizedImageSrcSet = (imageUrl) => {
+const createImageSrcSet = (imageUrl, widths) => {
   if (import.meta.env.DEV) return undefined
 
-  return IMAGE_WIDTHS.map(
+  return widths.map(
     (width) => `${createNetlifyImageUrl(imageUrl, width)} ${width}w`
   ).join(', ')
 }
 
-export default getOptimizedImageSrcSet
+export const getProjectThumbnailSrcSet = (imageUrl) =>
+  createImageSrcSet(imageUrl, THUMBNAIL_WIDTHS)
+
+export const getProjectGallerySrcSet = (imageUrl) =>
+  createImageSrcSet(imageUrl, GALLERY_WIDTHS)
