@@ -6,6 +6,7 @@ export const projects = [
     desc: 'Aplicación full stack para gestionar notas y archivos, construida sobre una arquitectura serverless, segura y orientada a eventos.',
     stack:
       'Next.js 16 · TypeScript · AWS Lambda · API Gateway · DynamoDB · Cognito · S3 · SQS · SES · GitHub Actions',
+    thumbnail: '/projects/notas/rueda-inicial.png',
     liveUrl: 'https://notas-app-one-bice.vercel.app',
     featured: true,
     architecture: ['Next.js', 'Cognito', 'API Gateway', 'Lambda', 'DynamoDB'],
