@@ -4,7 +4,7 @@ import useProjectModalStore from '../../store/useProjectModalStore'
 import { getProjectThumbnailSrcSet } from '../../utils/getProjectImageSrcSet'
 import { getProjectTheme } from './projectThemes'
 
-const ProjectCard = ({ project }) => {
+const ProjectCard = ({ project, onThumbnailSettled }) => {
   // Estado y acciones
   const [isThumbnailLoaded, setIsThumbnailLoaded] = useState(false)
   const openProject = useProjectModalStore((state) => state.openProject)
@@ -18,6 +18,7 @@ const ProjectCard = ({ project }) => {
     useProjectCardEffect()
 
   const handleThumbnailError = (event) => {
+    onThumbnailSettled(project.thumbnail)
     event.currentTarget.onerror = null
     event.currentTarget.removeAttribute('srcset')
     event.currentTarget.src = project.thumbnail
@@ -84,9 +85,13 @@ const ProjectCard = ({ project }) => {
           srcSet={thumbnailSrcSet}
           sizes='(max-width: 767px) calc(100vw - 32px), 560px'
           alt={`Vista previa de ${project.title}`}
-          loading='lazy'
+          loading='eager'
+          fetchPriority='high'
           decoding='async'
-          onLoad={() => setIsThumbnailLoaded(true)}
+          onLoad={() => {
+            setIsThumbnailLoaded(true)
+            onThumbnailSettled(project.thumbnail)
+          }}
           onError={handleThumbnailError}
           className={`h-full w-full object-cover transition-[opacity,transform] duration-700 group-hover:scale-105 ${
             isThumbnailLoaded ? 'opacity-100' : 'opacity-0'
