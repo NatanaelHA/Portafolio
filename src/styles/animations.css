@@ -15,6 +15,17 @@
     animation: galleryImageEnter 0.3s ease-out;
   }
 
+  .animate-image-skeleton {
+    background: linear-gradient(
+      100deg,
+      rgb(226 232 240) 20%,
+      rgb(248 250 252) 40%,
+      rgb(226 232 240) 60%
+    );
+    background-size: 200% 100%;
+    animation: imageSkeletonShimmer 1.4s ease-in-out infinite;
+  }
+
   .animate-modal-overlay-out {
     animation: modalOverlayOut 0.2s ease-in forwards;
   }
@@ -79,6 +90,16 @@
     to {
       opacity: 1;
       filter: blur(0);
+    }
+  }
+
+  @keyframes imageSkeletonShimmer {
+    from {
+      background-position: 200% 0;
+    }
+
+    to {
+      background-position: -200% 0;
     }
   }
 
@@ -190,6 +211,7 @@
     .animate-modal-overlay,
     .animate-modal-content,
     .animate-gallery-image,
+    .animate-image-skeleton,
     .animate-modal-overlay-out,
     .animate-modal-content-out,
     .animate-highlight,
