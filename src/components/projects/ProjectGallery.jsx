@@ -3,6 +3,9 @@ import useProjectGallery from '../../hooks/useProjectGallery'
 import { getProjectGallerySrcSet } from '../../utils/getProjectImageSrcSet'
 import { GALLERY_SIZES } from '../../utils/imageSizes'
 
+const GALLERY_ARROW_STYLES =
+  'absolute top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/60 bg-white/80 text-2xl text-slate-700 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-white hover:text-slate-950 active:scale-95'
+
 const ProjectGallery = ({
   images = [],
   projectTitle,
@@ -91,7 +94,7 @@ const ProjectGallery = ({
               type='button'
               aria-label='Ver imagen anterior'
               onClick={showPreviousImage}
-              className='absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/60 bg-white/80 text-2xl text-slate-700 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-white hover:text-slate-950 active:scale-95'
+              className={`left-3 ${GALLERY_ARROW_STYLES}`}
             >
               ‹
             </button>
@@ -99,7 +102,7 @@ const ProjectGallery = ({
               type='button'
               aria-label='Ver imagen siguiente'
               onClick={showNextImage}
-              className='absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/60 bg-white/80 text-2xl text-slate-700 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-white hover:text-slate-950 active:scale-95'
+              className={`right-3 ${GALLERY_ARROW_STYLES}`}
             >
               ›
             </button>

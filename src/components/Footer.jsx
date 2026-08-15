@@ -51,11 +51,11 @@ const Footer = () => {
           {/* Datos de contacto */}
           <div
             key={activeRequest}
-            className='flex flex-col items-center gap-2 text-sm text-slate-600 md:items-start'
+            className={`flex flex-col items-center gap-2 text-sm text-slate-600 md:items-start ${contactAnimation}`}
           >
             <a
               href='mailto:natanaelhuenullan31@gmail.com'
-              className={`contact-item flex items-center gap-2 transition-colors hover:text-blue-600 ${contactAnimation}`}
+              className='flex items-center gap-2 transition-colors hover:text-blue-600'
             >
               <span className='font-bold text-slate-800'>Email:</span>
               natanaelhuenullan31@gmail.com
@@ -64,7 +64,7 @@ const Footer = () => {
               href='https://wa.me/56937245527'
               target='_blank'
               rel='noreferrer'
-              className={`contact-item flex items-center gap-2 transition-colors hover:text-blue-600 ${contactAnimation}`}
+              className='flex items-center gap-2 transition-colors hover:text-blue-600'
             >
               <span className='font-bold text-slate-800'>Celular:</span>
               +56 9 3724 5527
@@ -73,7 +73,7 @@ const Footer = () => {
               href='https://www.linkedin.com/in/natanael-huenullan-acevedo-3140b0239'
               target='_blank'
               rel='noreferrer'
-              className={`contact-item flex items-center gap-2 transition-colors hover:text-blue-600 ${contactAnimation}`}
+              className='flex items-center gap-2 transition-colors hover:text-blue-600'
             >
               <span className='font-bold text-slate-800'>LinkedIn:</span>
               natanael-huenullan-acevedo
@@ -82,7 +82,7 @@ const Footer = () => {
               href='https://github.com/NatanaelHA'
               target='_blank'
               rel='noreferrer'
-              className={`contact-item flex items-center gap-2 transition-colors hover:text-blue-600 ${contactAnimation}`}
+              className='flex items-center gap-2 transition-colors hover:text-blue-600'
             >
               <span className='font-bold text-slate-800'>GitHub:</span>
               NatanaelHA

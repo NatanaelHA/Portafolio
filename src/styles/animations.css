@@ -107,18 +107,20 @@
   @keyframes highlight {
     0%,
     100% {
+      transform: scale(1);
       background-color: transparent;
       border-radius: 0;
       box-shadow: none;
-      padding: 0;
     }
 
     30%,
     70% {
+      transform: scale(1.04);
       background-color: #bfdbfe;
       border-radius: 8px;
-      box-shadow: 0 0 0 2px #2563eb;
-      padding: 4px 8px;
+      box-shadow:
+        0 0 0 4px #bfdbfe,
+        0 0 0 6px #2563eb;
     }
   }
 
