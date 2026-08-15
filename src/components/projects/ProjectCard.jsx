@@ -111,7 +111,7 @@ const ProjectCard = ({ project }) => {
           onClick={() => openProject(project)}
           className={`
             flex grow items-center justify-center rounded-xl
-            px-5 py-3 text-sm font-bold transition-all
+            px-5 py-3 text-sm font-bold transition-[background-color,transform]
             active:scale-95 ${theme.button}
           `}
         >

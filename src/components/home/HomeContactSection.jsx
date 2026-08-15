@@ -16,7 +16,7 @@ const HomeContactSection = () => {
       <button
         type='button'
         onClick={showContactInformation}
-        className='rounded-2xl bg-blue-600 px-10 py-4 font-bold text-white transition-all hover:bg-blue-500'
+        className='rounded-2xl bg-blue-600 px-10 py-4 font-bold text-white transition-colors hover:bg-blue-500'
       >
         Hablemos
       </button>

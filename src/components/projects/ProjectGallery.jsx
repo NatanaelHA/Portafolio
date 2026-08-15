@@ -76,7 +76,9 @@ const ProjectGallery = ({
             event.currentTarget.src = currentImage
           }}
           style={{ transform: `translateX(${dragOffset}px)` }}
-          className={`h-auto max-h-full w-auto max-w-full object-contain animate-gallery-image ${
+          className={`h-auto max-h-full w-auto max-w-full object-contain ${
+            isCurrentImageLoaded ? 'animate-gallery-image' : 'opacity-0'
+          } ${
             dragOffset === 0
               ? 'transition-transform duration-150'
               : 'transition-none'
