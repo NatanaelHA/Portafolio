@@ -1,12 +1,17 @@
+import useScrollReveal from '../../hooks/useScrollReveal'
 import useContactHighlightStore from '../../store/useContactHighlightStore'
 
 const HomeContactSection = () => {
+  const { elementRef, revealClassName } = useScrollReveal()
   const showContactInformation = useContactHighlightStore(
     (state) => state.showContactInformation,
   )
 
   return (
-    <section className='mt-20 rounded-[3rem] bg-slate-900 p-12 text-center text-white'>
+    <section
+      ref={elementRef}
+      className={`mt-20 rounded-[3rem] bg-slate-900 p-12 text-center text-white ${revealClassName}`}
+    >
       <h2 className='mb-4 text-3xl font-bold'>
         ¿Tienes una propuesta en mente?
       </h2>

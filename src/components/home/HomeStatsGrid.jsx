@@ -1,6 +1,13 @@
+import useScrollReveal from '../../hooks/useScrollReveal'
+
 const HomeStatsGrid = ({ stats }) => {
+  const { elementRef, revealClassName } = useScrollReveal()
+
   return (
-    <section className='mx-auto mb-16 grid max-w-4xl grid-cols-2 gap-3 md:grid-cols-4'>
+    <section
+      ref={elementRef}
+      className={`mx-auto mb-16 grid max-w-4xl grid-cols-2 gap-3 md:grid-cols-4 ${revealClassName}`}
+    >
       {stats.map(({ value, label }) => (
         <div
           key={label}
