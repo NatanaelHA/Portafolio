@@ -1,8 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import usePrefersReducedMotion from './usePrefersReducedMotion'
 
 const CLOSE_ANIMATION_DURATION = 220
 
 const useProjectModal = ({ project, onClose }) => {
+  const prefersReducedMotion = usePrefersReducedMotion()
   const [isClosing, setIsClosing] = useState(false)
   const closeTimeout = useRef(null)
   const closeButtonRef = useRef(null)
@@ -14,10 +16,12 @@ const useProjectModal = ({ project, onClose }) => {
 
     setIsClosing(true)
 
+    const closeDelay = prefersReducedMotion ? 0 : CLOSE_ANIMATION_DURATION
+
     closeTimeout.current = window.setTimeout(() => {
       onClose()
-    }, CLOSE_ANIMATION_DURATION)
-  }, [isClosing, onClose])
+    }, closeDelay)
+  }, [isClosing, onClose, prefersReducedMotion])
 
   // Bloquea el fondo y controla Escape y el foco con teclado
   useEffect(() => {

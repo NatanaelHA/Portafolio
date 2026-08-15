@@ -122,6 +122,24 @@
     }
   }
 
+  @keyframes highlightReduced {
+    0%,
+    100% {
+      color: inherit;
+      background-color: transparent;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    10%,
+    80% {
+      color: #1d4ed8;
+      background-color: #dbeafe;
+      border-radius: 8px;
+      box-shadow: 0 0 0 2px #60a5fa;
+    }
+  }
+
   @keyframes inspectorSearch {
     0%,
     10%,
@@ -186,13 +204,16 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .animate-highlight {
+      animation: highlightReduced 1.2s ease-in-out;
+    }
+
     .animate-fade-in,
     .animate-modal-overlay,
     .animate-modal-content,
     .animate-gallery-image,
     .animate-modal-overlay-out,
     .animate-modal-content-out,
-    .animate-highlight,
     .animate-inspector-search,
     .animate-inspector-shadow {
       animation: none;

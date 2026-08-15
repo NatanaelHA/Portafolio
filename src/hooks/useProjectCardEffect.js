@@ -1,6 +1,8 @@
 import { useRef } from 'react'
+import usePrefersReducedMotion from './usePrefersReducedMotion'
 
 const useProjectCardEffect = () => {
+  const prefersReducedMotion = usePrefersReducedMotion()
   const cardBounds = useRef(null)
 
   const registerCardBounds = (event) => {
@@ -17,11 +19,7 @@ const useProjectCardEffect = () => {
     card.style.setProperty('--mouse-x', `${pointerX}px`)
     card.style.setProperty('--mouse-y', `${pointerY}px`)
 
-    const reducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)',
-    ).matches
-
-    if (event.pointerType === 'touch' || reducedMotion) return
+    if (event.pointerType === 'touch' || prefersReducedMotion) return
 
     const rotateY = (pointerX / bounds.width - 0.5) * 6
     const rotateX = (pointerY / bounds.height - 0.5) * -6

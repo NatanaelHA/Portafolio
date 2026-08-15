@@ -1,16 +1,25 @@
 import { useEffect, useRef, useState } from 'react'
+import usePrefersReducedMotion from '../hooks/usePrefersReducedMotion'
 import useContactHighlightStore from '../store/useContactHighlightStore'
 
 const Footer = () => {
   const requestId = useContactHighlightStore((state) => state.requestId)
+  const prefersReducedMotion = usePrefersReducedMotion()
   const [activeRequest, setActiveRequest] = useState(0)
   const footerRef = useRef(null)
+  const reducedMotionRef = useRef(prefersReducedMotion)
+
+  useEffect(() => {
+    reducedMotionRef.current = prefersReducedMotion
+  }, [prefersReducedMotion])
 
   // Lleva al contacto y activa su resaltado
   useEffect(() => {
     if (requestId === 0) return undefined
 
-    footerRef.current?.scrollIntoView({ behavior: 'smooth' })
+    const scrollBehavior = reducedMotionRef.current ? 'auto' : 'smooth'
+
+    footerRef.current?.scrollIntoView({ behavior: scrollBehavior })
 
     const highlightTimer = window.setTimeout(() => {
       setActiveRequest(requestId)

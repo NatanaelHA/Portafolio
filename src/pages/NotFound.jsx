@@ -15,11 +15,11 @@ const NotFound = () => {
       />
 
       {/* Código de error */}
-      <h1 className='relative text-8xl font-black tracking-tighter text-slate-800 animate-pulse md:text-9xl'>
+      <h1 className='relative animate-pulse text-8xl font-black tracking-tighter text-slate-800 motion-reduce:animate-none md:text-9xl'>
         404
         <span
           aria-hidden='true'
-          className='absolute inset-0 text-blue-500 opacity-50 animate-ping'
+          className='absolute inset-0 animate-ping text-blue-500 opacity-50 motion-reduce:animate-none'
         >
           404
         </span>

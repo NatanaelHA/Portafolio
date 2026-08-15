@@ -76,7 +76,7 @@ const ProjectCard = ({ project }) => {
         {!isThumbnailLoaded && (
           <div
             aria-hidden='true'
-            className='absolute inset-0 animate-pulse bg-slate-300'
+            className='absolute inset-0 animate-pulse bg-slate-300 motion-reduce:animate-none'
           />
         )}
 
