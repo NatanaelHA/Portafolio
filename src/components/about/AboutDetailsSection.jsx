@@ -1,6 +1,13 @@
+import useScrollReveal from '../../hooks/useScrollReveal'
+
 const AboutDetailsSection = () => {
+  const { elementRef, revealClassName } = useScrollReveal()
+
   return (
-    <section className='space-y-6'>
+    <section
+      ref={elementRef}
+      className={`space-y-6 ${revealClassName}`}
+    >
       {/* Cursos */}
       <h2 className='flex items-center gap-2 text-xl font-bold text-slate-800'>
         ✨ Cursos & Especializaciones

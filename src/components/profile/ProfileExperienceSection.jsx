@@ -1,8 +1,11 @@
+import useScrollReveal from '../../hooks/useScrollReveal'
 import ProfileExperienceCard from './ProfileExperienceCard'
 
 const ProfileExperienceSection = ({ experience }) => {
+  const { elementRef, revealClassName } = useScrollReveal()
+
   return (
-    <section className='mt-12'>
+    <section ref={elementRef} className={`mt-12 ${revealClassName}`}>
       <div className='mb-6 flex items-center gap-3'>
         <span aria-hidden='true' className='h-7 w-2 rounded-full bg-blue-600' />
         <div>
