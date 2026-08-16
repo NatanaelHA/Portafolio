@@ -4,8 +4,7 @@ import {
   TransformComponent,
   TransformWrapper,
 } from 'react-zoom-pan-pinch'
-import { getProjectGallerySrcSet } from '../../utils/getProjectImageSrcSet'
-import { GALLERY_SIZES } from '../../utils/imageSizes'
+import { getProjectExpandedImageUrl } from '../../utils/getProjectImageSrcSet'
 
 // Visor de pantalla completa exclusivo para teléfonos y pantallas pequeñas.
 const ProjectMobileImageViewer = ({ imageUrl, alt, onClose }) => {
@@ -36,6 +35,8 @@ const ProjectMobileImageViewer = ({ imageUrl, alt, onClose }) => {
   }, [imageUrl, onClose])
 
   if (!imageUrl) return null
+
+  const expandedImageUrl = getProjectExpandedImageUrl(imageUrl)
 
   // El segundo portal coloca el visor por encima del modal completo del proyecto.
   return createPortal(
@@ -80,11 +81,13 @@ const ProjectMobileImageViewer = ({ imageUrl, alt, onClose }) => {
             }}
           >
             <img
-              src={imageUrl}
-              srcSet={getProjectGallerySrcSet(imageUrl)}
-              sizes={GALLERY_SIZES}
+              src={expandedImageUrl}
               alt={alt}
               draggable='false'
+              onError={(event) => {
+                event.currentTarget.onerror = null
+                event.currentTarget.src = imageUrl
+              }}
               className='max-h-[calc(100dvh-5rem)] max-w-full select-none object-contain'
             />
           </TransformComponent>
