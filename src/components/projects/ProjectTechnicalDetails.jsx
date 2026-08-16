@@ -11,7 +11,7 @@ const ProjectTechnicalDetails = ({ project }) => {
 
   return (
     <div
-      className={`mb-6 grid gap-4 md:grid-cols-2 ${
+      className={`mb-7 grid gap-5 sm:mb-6 sm:gap-4 md:grid-cols-2 ${
         isRouteProject ? 'lg:grid-cols-[0.75fr_1.25fr]' : ''
       }`}
     >

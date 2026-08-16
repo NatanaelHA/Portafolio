@@ -4,12 +4,21 @@ export const projects = [
     variant: 'aws',
     category: 'Proyecto destacado · AWS',
     desc: 'Aplicación full stack para gestionar notas y archivos, construida sobre una arquitectura serverless, segura y orientada a eventos.',
-    stack:
-      'Next.js 16 · TypeScript · AWS Lambda · API Gateway · DynamoDB · Cognito · S3 · SQS · SES · GitHub Actions',
     thumbnail: '/projects/notas/rueda-inicial.png',
     liveUrl: 'https://notas-app-one-bice.vercel.app',
     featured: true,
-    architecture: ['Next.js', 'Cognito', 'API Gateway', 'Lambda', 'DynamoDB'],
+    architecture: [
+      'Next.js 16',
+      'TypeScript',
+      'AWS Lambda',
+      'API Gateway',
+      'DynamoDB',
+      'Cognito',
+      'S3',
+      'SQS',
+      'SES',
+      'GitHub Actions',
+    ],
     highlights: [
       'Sesiones validadas server-side mediante Amazon Cognito y cookies.',
       'Carga segura de adjuntos en S3 usando presigned URLs.',
@@ -28,8 +37,6 @@ export const projects = [
     variant: 'commerce',
     category: 'Full Stack',
     desc: 'Simulacion de una aplicación de comercio, con precios, mantenciones, carrito de compras y plataformas de pago integrados.',
-    stack:
-      'React · Node.js · Express · MongoDB Atlas · Stripe Sandbox · PayPal Sandbox',
     architecture: [
       'React',
       'Node.js',
@@ -61,7 +68,6 @@ export const projects = [
     variant: 'dashboard',
     category: 'Frontend',
     desc: 'Panel administrativo para tienda con métricas, gestión de usuarios y tablas',
-    stack: 'HTML · CSS · JavaScript · LocalStorage',
     architecture: ['HTML', 'CSS', 'JavaScript', 'LocalStorage'],
     highlights: [
       'Panel administrativo desarrollado completamente con tecnologías web nativas.',
@@ -83,8 +89,6 @@ export const projects = [
     variant: 'route',
     category: 'Mobile Full Stack · IA',
     desc: 'App móvil optimizador de itinerarios. Incluye autenticacion, subscripción Plus, clima en tiempo real, estado de transporte público y navegación GPS. Las rutas son reordenadas por Gemini AI según proximidad, horarios y tipo de lugar.',
-    stack:
-      'Ionic 8 · Angular 21 · Node.js · Gemini AI · Google Maps Platform · Firebase · Cloud Firestore · App Engine · Render · PayPal Sandbox',
     architecture: [
       'Ionic 8',
       'Angular 21',

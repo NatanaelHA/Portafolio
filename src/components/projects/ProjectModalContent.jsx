@@ -7,10 +7,12 @@ import { getProjectTheme } from './projectThemes'
 
 const ProjectModalContent = ({ project, onClose }) => {
   const theme = getProjectTheme(project?.variant).modal
-  const { isClosing, handleClose, closeButtonRef, dialogRef } = useProjectModal({
-    project,
-    onClose,
-  })
+  const { isClosing, handleClose, closeButtonRef, dialogRef } = useProjectModal(
+    {
+      project,
+      onClose,
+    },
+  )
 
   if (!project) return null
 
@@ -26,7 +28,7 @@ const ProjectModalContent = ({ project, onClose }) => {
         role='dialog'
         aria-modal='true'
         aria-labelledby='project-modal-title'
-        className={`relative max-h-[95vh] w-full max-w-6xl overflow-y-auto rounded-3xl p-8 shadow-2xl ${
+        className={`relative max-h-[calc(100dvh-1rem)] w-full max-w-6xl overflow-y-auto rounded-2xl p-4 pt-6 shadow-2xl sm:max-h-[95vh] sm:rounded-3xl sm:p-8 ${
           isClosing ? 'animate-modal-content-out' : 'animate-modal-content'
         } ${theme.surface}`}
         onClick={(event) => event.stopPropagation()}
@@ -41,7 +43,7 @@ const ProjectModalContent = ({ project, onClose }) => {
           type='button'
           aria-label='Cerrar detalles del proyecto'
           onClick={handleClose}
-          className='absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition-colors hover:bg-slate-200'
+          className='sticky right-3 top-3 z-20 float-right flex h-10 w-10 items-center justify-center rounded-full bg-slate-100/95 text-slate-500 shadow-md backdrop-blur-sm transition-colors hover:bg-slate-200 sm:absolute sm:right-4 sm:top-4 sm:float-none sm:h-8 sm:w-8 sm:shadow-none'
         >
           ✕
         </button>

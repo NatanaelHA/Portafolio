@@ -101,11 +101,11 @@ const ProjectCard = ({ project }) => {
       </p>
 
       <p className='mb-5 text-xs font-semibold leading-relaxed opacity-70'>
-        {project.stack}
+        {project.architecture.join(' · ')}
       </p>
 
       {/* Acciones */}
-      <div className='flex flex-col gap-3 sm:flex-row'>
+      <div className='flex'>
         <button
           type='button'
           onClick={() => openProject(project)}
@@ -117,18 +117,6 @@ const ProjectCard = ({ project }) => {
         >
           Ver proyecto
         </button>
-
-        {project.liveUrl && (
-          <a
-            href={project.liveUrl}
-            target='_blank'
-            rel='noreferrer'
-            aria-label={`Abrir ${project.title} en una pestaña nueva`}
-            className='flex items-center justify-center rounded-xl border border-current/15 px-5 py-3 text-sm font-bold transition-colors hover:bg-white/10'
-          >
-            Abrir <span aria-hidden='true'>↗</span>
-          </a>
-        )}
       </div>
     </article>
   )

@@ -1,6 +1,6 @@
 const ProjectHighlights = ({ highlights, twoColumns = false }) => {
   return (
-    <section className='rounded-2xl border border-slate-200/80 bg-white/70 p-5'>
+    <section className='rounded-2xl border border-slate-200/80 bg-white/70 p-4 sm:p-5'>
       <h3 className='mb-3 text-xs font-black uppercase tracking-[0.16em] text-slate-700'>
         Puntos destacados
       </h3>

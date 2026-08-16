@@ -1,3 +1,5 @@
+import { createElement } from 'react'
+
 const ProfileSkillCard = ({ skill, icons = [] }) => {
   return (
     <article className='flex h-full transform-gpu flex-col rounded-2xl border border-slate-100 bg-white p-6 shadow-sm transition-all duration-200 hover:scale-[1.02] hover:border-blue-200 hover:shadow-md motion-reduce:hover:scale-100'>
@@ -21,7 +23,7 @@ const ProfileSkillCard = ({ skill, icons = [] }) => {
               className='flex h-9 w-9 items-center justify-center rounded-xl bg-slate-50 text-lg shadow-xs transition-transform duration-200 hover:z-10 hover:scale-[1.4] motion-reduce:hover:scale-100'
               style={{ color }}
             >
-              <Icon aria-hidden='true' />
+              {createElement(Icon, { 'aria-hidden': true })}
             </span>
           ))}
         </div>

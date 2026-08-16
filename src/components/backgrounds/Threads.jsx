@@ -20,6 +20,7 @@ uniform vec3 iResolution;
 uniform vec3 uColor;
 uniform float uAmplitude;
 uniform float uDistance;
+uniform float uVertical;
 uniform vec2 uMouse;
 
 const int LINE_COUNT = 40;
@@ -96,6 +97,7 @@ float line(
 
 void main() {
   vec2 position = gl_FragCoord.xy / iResolution.xy;
+  position = mix(position, position.yx, uVertical);
   float lineStrength = 1.0;
 
   for (int index = 0; index < LINE_COUNT; index++) {
@@ -121,6 +123,7 @@ const Threads = ({
   amplitude = 1,
   distance = 0,
   enableMouseInteraction = false,
+  verticalOnMobile = false,
   isAnimated = true,
   className = '',
 }) => {
@@ -145,6 +148,7 @@ const Threads = ({
         uColor: { value: new Color(...color) },
         uAmplitude: { value: amplitude },
         uDistance: { value: distance },
+        uVertical: { value: 0 },
         uMouse: { value: new Float32Array([0.5, 0.5]) },
       },
     })
@@ -162,6 +166,8 @@ const Threads = ({
         gl.canvas.height,
         gl.canvas.width / gl.canvas.height,
       )
+      program.uniforms.uVertical.value =
+        verticalOnMobile && clientWidth < 640 ? 1 : 0
     }
 
     const resizeObserver = new ResizeObserver(resize)
@@ -207,7 +213,14 @@ const Threads = ({
       gl.canvas.remove()
       gl.getExtension('WEBGL_lose_context')?.loseContext()
     }
-  }, [amplitude, color, distance, enableMouseInteraction, isAnimated])
+  }, [
+    amplitude,
+    color,
+    distance,
+    enableMouseInteraction,
+    isAnimated,
+    verticalOnMobile,
+  ])
 
   return (
     <div

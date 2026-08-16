@@ -1,31 +1,22 @@
 const ProjectModalHeader = ({ project, theme }) => {
   return (
     <header>
-      <div className='flex flex-wrap items-center gap-2 pr-10'>
-        <span
-          className={`
-            inline-flex rounded-full border px-3 py-1 text-[10px]
-            font-bold uppercase tracking-widest ${theme.badge}
-          `}
-        >
-          {project.stack}
-        </span>
-
-        {project.featured && (
+      {project.featured && (
+        <div className='pr-12 sm:pr-10'>
           <span className='inline-flex rounded-full bg-slate-900 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-white'>
             Proyecto destacado
           </span>
-        )}
-      </div>
+        </div>
+      )}
 
       <h2
         id='project-modal-title'
-        className='mt-3 mb-2 text-2xl font-black text-slate-900'
+        className='mb-3 mt-5 text-xl font-black leading-tight text-slate-900 sm:mb-2 sm:mt-3 sm:text-2xl'
       >
         {project.title}
       </h2>
 
-      <p className='mb-6 text-sm leading-relaxed text-slate-500'>
+      <p className='mb-7 text-sm leading-relaxed text-slate-500 sm:mb-6'>
         {project.desc}
       </p>
 
@@ -35,8 +26,9 @@ const ProjectModalHeader = ({ project, theme }) => {
           target='_blank'
           rel='noreferrer'
           className={`
-            mb-6 inline-flex items-center gap-2 rounded-xl px-5 py-3
-            text-sm font-bold transition-colors ${theme.button}
+            mb-7 inline-flex w-full items-center justify-center gap-2
+            rounded-xl px-5 py-3 text-sm font-bold transition-colors
+            sm:mb-6 sm:w-auto ${theme.button}
           `}
         >
           Abrir aplicación

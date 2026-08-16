@@ -9,7 +9,6 @@ export const projectThemes = {
       button: 'bg-amber-400 text-slate-950 hover:bg-amber-300',
     },
     modal: {
-      badge: 'border-amber-200 bg-amber-50 text-amber-700',
       button: 'bg-amber-400 text-slate-950 hover:bg-amber-300',
       dot: 'bg-amber-400',
       frame: 'border-amber-200',
@@ -28,7 +27,6 @@ export const projectThemes = {
       button: 'bg-emerald-600 text-white hover:bg-emerald-500',
     },
     modal: {
-      badge: 'border-emerald-200 bg-emerald-50 text-emerald-700',
       button: 'bg-emerald-600 text-white hover:bg-emerald-500',
       dot: 'bg-emerald-500',
       frame: 'border-emerald-200',
@@ -47,7 +45,6 @@ export const projectThemes = {
       button: 'bg-violet-600 text-white hover:bg-violet-500',
     },
     modal: {
-      badge: 'border-violet-200 bg-violet-50 text-violet-700',
       button: 'bg-violet-600 text-white hover:bg-violet-500',
       dot: 'bg-violet-500',
       frame: 'border-violet-200',
@@ -66,7 +63,6 @@ export const projectThemes = {
       button: 'bg-cyan-600 text-white hover:bg-cyan-500',
     },
     modal: {
-      badge: 'border-cyan-200 bg-cyan-50 text-cyan-700',
       button: 'bg-cyan-600 text-white hover:bg-cyan-500',
       dot: 'bg-cyan-500',
       frame: 'border-cyan-200',

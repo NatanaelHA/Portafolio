@@ -14,6 +14,7 @@ const HomeAnimatedBackground = () => {
           color={[0.22, 0.38, 0.82]}
           amplitude={1.15}
           distance={0.35}
+          verticalOnMobile
           isAnimated={!prefersReducedMotion}
           className='opacity-30'
         />

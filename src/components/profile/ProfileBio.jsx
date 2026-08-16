@@ -5,7 +5,7 @@ const ProfileBio = () => {
         <span aria-hidden='true' className='h-6 w-2 rounded-full bg-blue-600' />
         Sobre mí
       </h2>
-      <p className='text-justify text-base leading-relaxed text-slate-600 md:text-lg'>
+      <p className='text-left text-base leading-relaxed text-slate-600 md:text-justify md:text-lg'>
         Ingeniero en Informática y Analista Programador Computacional con 2 años
         de experiencia profesional en desarrollo full stack. Creo aplicaciones
         web y móviles, backends e integraciones cloud con foco en soluciones
