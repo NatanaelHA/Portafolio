@@ -10,12 +10,12 @@ const HomeContactSection = () => {
   return (
     <section
       ref={elementRef}
-      className={`mt-20 rounded-[3rem] bg-slate-900 p-12 text-center text-white ${revealClassName}`}
+      className={`mt-20 rounded-[3rem] bg-slate-950 p-12 text-center text-white ${revealClassName}`}
     >
       <h2 className='mb-4 text-3xl font-bold'>
         ¿Tienes una propuesta en mente?
       </h2>
-      <p className='mx-auto mb-8 max-w-md text-slate-400'>
+      <p className='mx-auto mb-8 max-w-md text-slate-300'>
         Estoy disponible para nuevas oportunidades y colaboraciones técnicas.
       </p>
       <button

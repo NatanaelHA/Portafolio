@@ -1,3 +1,4 @@
+import ProfileAnimatedBackground from '../components/profile/ProfileAnimatedBackground'
 import ProfileBio from '../components/profile/ProfileBio'
 import ProfileExperienceSection from '../components/profile/ProfileExperienceSection'
 import ProfileSkillsGrid from '../components/profile/ProfileSkillsGrid'
@@ -7,7 +8,9 @@ import { experience } from '../data/experience'
 
 const Profile = () => {
   return (
-    <div className='grow w-full max-w-5xl mx-auto p-6 py-12'>
+    <div className='relative isolate mx-auto w-full max-w-5xl grow p-6 py-12'>
+      <ProfileAnimatedBackground />
+
       <div className='grid grid-cols-1 lg:grid-cols-3 gap-8'>
         {/* Resumen */}
         <div className='lg:col-span-1'>

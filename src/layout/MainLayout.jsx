@@ -6,7 +6,7 @@ const MainLayout = () => {
   const location = useLocation();
 
   return (
-    <div className='flex flex-col min-h-screen'>
+    <div className='flex min-h-screen flex-col overflow-x-clip'>
       <Nav />
       <main className='grow container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col'>
         

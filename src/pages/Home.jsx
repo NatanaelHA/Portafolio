@@ -1,3 +1,4 @@
+import HomeAnimatedBackground from '../components/home/HomeAnimatedBackground'
 import HomeContactSection from '../components/home/HomeContactSection'
 import HomeHero from '../components/home/HomeHero'
 import HomeProjectsSection from '../components/home/HomeProjectsSection'
@@ -7,7 +8,9 @@ import { projects } from '../data/projects'
 
 const Home = () => {
   return (
-    <div className='px-4 py-12 md:py-16'>
+    <div className='relative isolate px-4 py-12 md:py-16'>
+      <HomeAnimatedBackground />
+
       {/* Presentación */}
       <HomeHero />
       {/* Resumen profesional */}
