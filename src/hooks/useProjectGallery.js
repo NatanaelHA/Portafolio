@@ -1,12 +1,19 @@
 import { useRef, useState } from 'react'
 
 const SWIPE_DISTANCE = 50
+// Evita que un pequeño movimiento del dedo convierta un toque en arrastre.
+const DRAG_TOLERANCE = 8
 
 const useProjectGallery = (imageCount) => {
+  // Estado compartido por el carrusel de desktop y móvil.
   const [currentIndex, setCurrentIndex] = useState(0)
   const [dragOffset, setDragOffset] = useState(0)
   const dragStart = useRef(null)
 
+  // Permite que el visor móvil distinga un toque de un deslizamiento.
+  const imageWasDragged = useRef(false)
+
+  // Navegación utilizada por flechas, indicadores y gestos.
   const showPreviousImage = () => {
     setCurrentIndex((index) => (index === 0 ? imageCount - 1 : index - 1))
   }
@@ -19,17 +26,25 @@ const useProjectGallery = (imageCount) => {
     setCurrentIndex(index)
   }
 
+  // El mismo flujo admite arrastre con mouse en desktop y con dedo en móvil.
   const startDragging = (event) => {
     if (imageCount < 2 || event.target.closest('button')) return
 
     dragStart.current = event.clientX
+    imageWasDragged.current = false
     event.currentTarget.setPointerCapture(event.pointerId)
   }
 
   const dragImage = (event) => {
     if (dragStart.current === null) return
 
-    setDragOffset(event.clientX - dragStart.current)
+    const distance = event.clientX - dragStart.current
+
+    if (Math.abs(distance) > DRAG_TOLERANCE) {
+      imageWasDragged.current = true
+    }
+
+    setDragOffset(distance)
   }
 
   const finishDragging = (event) => {
@@ -53,6 +68,9 @@ const useProjectGallery = (imageCount) => {
     setDragOffset(0)
   }
 
+  // ProjectGallery consulta esta señal antes de abrir el visor móvil.
+  const wasImageDragged = () => imageWasDragged.current
+
   return {
     currentIndex,
     dragOffset,
@@ -63,6 +81,7 @@ const useProjectGallery = (imageCount) => {
     dragImage,
     finishDragging,
     cancelDragging,
+    wasImageDragged,
   }
 }
 

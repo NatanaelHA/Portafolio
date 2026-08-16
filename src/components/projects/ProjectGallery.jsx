@@ -2,6 +2,7 @@ import { useState } from 'react'
 import useProjectGallery from '../../hooks/useProjectGallery'
 import { getProjectGallerySrcSet } from '../../utils/getProjectImageSrcSet'
 import { GALLERY_SIZES } from '../../utils/imageSizes'
+import ProjectMobileImageViewer from './ProjectMobileImageViewer'
 
 const GALLERY_ARROW_STYLES =
   'absolute top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/60 bg-white/80 text-2xl text-slate-700 shadow-lg backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-white hover:text-slate-950 active:scale-95'
@@ -14,6 +15,7 @@ const ProjectGallery = ({
   compact = false,
 }) => {
   const [loadedImage, setLoadedImage] = useState(null)
+  const [isImageExpanded, setIsImageExpanded] = useState(false)
 
   const {
     currentIndex,
@@ -25,6 +27,7 @@ const ProjectGallery = ({
     dragImage,
     finishDragging,
     cancelDragging,
+    wasImageDragged,
   } = useProjectGallery(images.length)
 
   // Mantiene un espacio visual cuando el proyecto no tiene capturas
@@ -39,6 +42,15 @@ const ProjectGallery = ({
   const currentImage = images[currentIndex]
   const currentImageSrcSet = getProjectGallerySrcSet(currentImage)
   const isCurrentImageLoaded = loadedImage === currentImage
+
+  // En móvil, un toque abre el visor; un arrastre conserva el carrusel.
+  const openExpandedImage = () => {
+    const isMobile = window.matchMedia('(max-width: 767px)').matches
+
+    if (isMobile && !wasImageDragged()) {
+      setIsImageExpanded(true)
+    }
+  }
 
   return (
     <div>
@@ -78,6 +90,7 @@ const ProjectGallery = ({
             event.currentTarget.removeAttribute('srcset')
             event.currentTarget.src = currentImage
           }}
+          onClick={openExpandedImage}
           style={{ transform: `translateX(${dragOffset}px)` }}
           className={`h-auto max-h-full w-auto max-w-full object-contain ${
             isCurrentImageLoaded ? 'animate-gallery-image' : 'opacity-0'
@@ -134,6 +147,12 @@ const ProjectGallery = ({
           ))}
         </div>
       )}
+
+      <ProjectMobileImageViewer
+        imageUrl={isImageExpanded ? currentImage : null}
+        alt={`${projectTitle} - imagen ${currentIndex + 1} ampliada`}
+        onClose={() => setIsImageExpanded(false)}
+      />
     </div>
   )
 }
