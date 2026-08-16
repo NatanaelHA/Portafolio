@@ -1,11 +1,16 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import {
+  TransformComponent,
+  TransformWrapper,
+} from 'react-zoom-pan-pinch'
 import { getProjectGallerySrcSet } from '../../utils/getProjectImageSrcSet'
 import { GALLERY_SIZES } from '../../utils/imageSizes'
 
 // Visor de pantalla completa exclusivo para teléfonos y pantallas pequeñas.
 const ProjectMobileImageViewer = ({ imageUrl, alt, onClose }) => {
   const closeButtonRef = useRef(null)
+  const [scale, setScale] = useState(1)
 
   useEffect(() => {
     if (!imageUrl) return undefined
@@ -51,14 +56,46 @@ const ProjectMobileImageViewer = ({ imageUrl, alt, onClose }) => {
         ✕
       </button>
 
-      <img
-        src={imageUrl}
-        srcSet={getProjectGallerySrcSet(imageUrl)}
-        sizes={GALLERY_SIZES}
-        alt={alt}
+      <div
+        className='flex h-full w-full touch-none items-center justify-center overflow-hidden'
         onClick={(event) => event.stopPropagation()}
-        className='max-h-[calc(100dvh-5rem)] max-w-full object-contain'
-      />
+      >
+        {/* La librería limita el zoom y el desplazamiento dentro del visor. */}
+        <TransformWrapper
+          initialScale={1}
+          minScale={1}
+          maxScale={4}
+          centerOnInit
+          centerZoomedOut
+          limitToBounds
+          doubleClick={{ mode: 'toggle' }}
+          onTransform={(_, state) => setScale(state.scale)}
+        >
+          <TransformComponent
+            wrapperStyle={{ width: '100%', height: '100%' }}
+            contentStyle={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <img
+              src={imageUrl}
+              srcSet={getProjectGallerySrcSet(imageUrl)}
+              sizes={GALLERY_SIZES}
+              alt={alt}
+              draggable='false'
+              className='max-h-[calc(100dvh-5rem)] max-w-full select-none object-contain'
+            />
+          </TransformComponent>
+        </TransformWrapper>
+      </div>
+
+      {scale > 1 && (
+        <span className='pointer-events-none absolute bottom-4 rounded-full bg-black/45 px-3 py-1 text-xs font-bold text-white/85'>
+          {scale.toFixed(1)}x
+        </span>
+      )}
     </div>,
     document.body,
   )

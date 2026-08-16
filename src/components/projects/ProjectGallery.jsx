@@ -148,7 +148,9 @@ const ProjectGallery = ({
         </div>
       )}
 
+      {/* La key reinicia el zoom al abrir otra captura o volver a abrir el visor. */}
       <ProjectMobileImageViewer
+        key={isImageExpanded ? currentImage : 'closed'}
         imageUrl={isImageExpanded ? currentImage : null}
         alt={`${projectTitle} - imagen ${currentIndex + 1} ampliada`}
         onClose={() => setIsImageExpanded(false)}
