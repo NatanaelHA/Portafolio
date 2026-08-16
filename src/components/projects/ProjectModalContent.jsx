@@ -16,6 +16,7 @@ const ProjectModalContent = ({ project, onClose }) => {
 
   if (!project) return null
 
+  // El portal evita que overflow o z-index de Home limiten el modal.
   return createPortal(
     <div
       className={`fixed inset-0 z-9999 flex items-center justify-center bg-black/60 p-2 backdrop-blur-sm ${

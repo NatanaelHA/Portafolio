@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react'
 import { Color, Mesh, Program, Renderer, Triangle } from 'ogl'
 
+// OGL ejecuta estos shaders en WebGL: el vertex shader dibuja el plano y el
+// fragment shader calcula el color y movimiento de cada línea.
 const vertexShader = `
 attribute vec2 position;
 attribute vec2 uv;
@@ -167,6 +169,7 @@ const Threads = ({
         gl.canvas.width / gl.canvas.height,
       )
       program.uniforms.uVertical.value =
+        // En móvil intercambia los ejes para que las ondas recorran la pantalla verticalmente.
         verticalOnMobile && clientWidth < 640 ? 1 : 0
     }
 
@@ -205,6 +208,7 @@ const Threads = ({
     animationFrameRef.current = requestAnimationFrame(render)
 
     return () => {
+      // Libera listeners, canvas y contexto WebGL al desmontar el fondo.
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current)
       }

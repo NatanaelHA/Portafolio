@@ -1,8 +1,10 @@
 @layer utilities {
+  /* Entrada general de páginas */
   .animate-fade-in {
     animation: fadeIn 0.5s ease-out forwards;
   }
 
+  /* Apertura, cambio de imagen y cierre de modales */
   .animate-modal-overlay {
     animation: modalOverlay 0.2s ease-out;
   }
@@ -23,10 +25,12 @@
     animation: modalContentOut 0.2s ease-in forwards;
   }
 
+  /* Resaltado de los datos de contacto */
   .animate-highlight {
     animation: highlight 1.2s ease-in-out;
   }
 
+  /* Mascota de la página 404 */
   .animate-inspector-search {
     animation: inspectorSearch 4.2s ease-in-out infinite;
     transform-origin: 50% 85%;
@@ -36,6 +40,7 @@
     animation: inspectorShadow 4.2s ease-in-out infinite;
   }
 
+  /* Entrada de secciones al aparecer en el viewport */
   .scroll-reveal {
     opacity: 0;
     transform: translateY(24px);
@@ -224,6 +229,7 @@
     }
   }
 
+  /* Respeta la preferencia del sistema sin ocultar contenido importante. */
   @media (prefers-reduced-motion: reduce) {
     .animate-highlight {
       animation: highlightReduced 1.2s ease-in-out;

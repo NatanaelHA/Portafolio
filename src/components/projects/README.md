@@ -61,11 +61,11 @@ Estado del proyecto activo     → useProjectModalStore.js
 
 ## Datos esperados
 
-Cada proyecto puede incluir:
+Cada proyecto incluye:
 
-- `title`, `desc`, `stack`, `category` y `variant`.
+- `title`, `desc`, `category` y `variant`.
 - `thumbnail` e `images`.
-- `architecture` y `highlights`.
-- `featured` y `liveUrl` cuando correspondan.
+- `architecture` y `highlights` para describir su implementación.
+- `featured` y `liveUrl` son opcionales y se usan cuando corresponden.
 
 Para agregar un proyecto, el punto de entrada es `src/data/projects.js`. Si necesita una variante visual nueva, también debe agregarse en `projectThemes.js`.

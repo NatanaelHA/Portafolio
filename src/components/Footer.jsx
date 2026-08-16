@@ -7,13 +7,14 @@ const Footer = () => {
   const prefersReducedMotion = usePrefersReducedMotion()
   const [activeRequest, setActiveRequest] = useState(0)
   const footerRef = useRef(null)
+  // Conserva la preferencia actual sin reiniciar el efecto por cada cambio.
   const reducedMotionRef = useRef(prefersReducedMotion)
 
   useEffect(() => {
     reducedMotionRef.current = prefersReducedMotion
   }, [prefersReducedMotion])
 
-  // Lleva al contacto y activa su resaltado
+  // Lleva al contacto y retrasa el resaltado hasta que el scroll haya comenzado.
   useEffect(() => {
     if (requestId === 0) return undefined
 
@@ -49,6 +50,7 @@ const Footer = () => {
           </div>
 
           {/* Datos de contacto */}
+          {/* Una nueva key remonta el bloque y permite repetir la animación CSS. */}
           <div
             key={activeRequest}
             className={`flex flex-col items-center gap-2 text-sm text-slate-300 md:items-start ${contactAnimation}`}

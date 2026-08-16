@@ -12,7 +12,7 @@ const ProjectMobileImageViewer = ({ imageUrl, alt, onClose }) => {
 
     const previouslyFocusedElement = document.activeElement
 
-    // Captura Escape antes que el modal del proyecto para cerrar solo el visor.
+    // Captura Escape antes que el modal principal para cerrar únicamente el visor.
     const handleKeyDown = (event) => {
       if (event.key !== 'Escape') return
 
@@ -32,6 +32,7 @@ const ProjectMobileImageViewer = ({ imageUrl, alt, onClose }) => {
 
   if (!imageUrl) return null
 
+  // El segundo portal coloca el visor por encima del modal completo del proyecto.
   return createPortal(
     <div
       role='dialog'

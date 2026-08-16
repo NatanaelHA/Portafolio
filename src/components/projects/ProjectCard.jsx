@@ -19,6 +19,7 @@ const ProjectCard = ({ project }) => {
     useProjectCardEffect()
 
   const handleThumbnailError = (event) => {
+    // Si Netlify Images falla, reintenta la portada original sin `srcSet`.
     event.currentTarget.onerror = null
     event.currentTarget.removeAttribute('srcset')
     event.currentTarget.src = project.thumbnail

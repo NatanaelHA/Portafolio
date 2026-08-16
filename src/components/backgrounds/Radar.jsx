@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { Mesh, Program, Renderer, Triangle } from 'ogl'
 
+// OGL dibuja un plano WebGL y el fragment shader genera anillos, ejes y barrido.
 const vertexShader = `
 attribute vec2 position;
 
@@ -119,6 +120,7 @@ const Radar = ({
     animationFrameId = requestAnimationFrame(render)
 
     return () => {
+      // Detiene el render continuo y libera por completo el recurso WebGL.
       cancelAnimationFrame(animationFrameId)
       resizeObserver.disconnect()
       gl.canvas.remove()

@@ -5,6 +5,7 @@ const useProjectCardEffect = () => {
   const prefersReducedMotion = usePrefersReducedMotion()
   const cardBounds = useRef(null)
 
+  // Guarda las medidas una vez al entrar para no recalcularlas en cada movimiento.
   const registerCardBounds = (event) => {
     cardBounds.current = event.currentTarget.getBoundingClientRect()
   }
@@ -16,9 +17,11 @@ const useProjectCardEffect = () => {
     const pointerX = event.clientX - bounds.left
     const pointerY = event.clientY - bounds.top
 
+    // ProjectCard consume estas variables para posicionar el brillo radial.
     card.style.setProperty('--mouse-x', `${pointerX}px`)
     card.style.setProperty('--mouse-y', `${pointerY}px`)
 
+    // Touch conserva el brillo sin aplicar una inclinación incómoda al deslizar.
     if (event.pointerType === 'touch' || prefersReducedMotion) return
 
     const rotateY = (pointerX / bounds.width - 0.5) * 6

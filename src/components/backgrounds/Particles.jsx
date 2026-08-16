@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react'
 import { Camera, Geometry, Mesh, Program, Renderer } from 'ogl'
 
+// OGL renderiza las partículas como puntos WebGL; los shaders controlan su
+// desplazamiento, tamaño, color y brillo sin crear nodos HTML individuales.
 const vertexShader = `
 attribute vec3 position;
 attribute vec4 random;
@@ -166,6 +168,7 @@ const Particles = ({
     animationFrameId = requestAnimationFrame(render)
 
     return () => {
+      // Evita dejar animaciones o contextos WebGL activos al cambiar de página.
       cancelAnimationFrame(animationFrameId)
       resizeObserver.disconnect()
       gl.canvas.remove()

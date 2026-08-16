@@ -23,6 +23,7 @@ const ProfileSkillCard = ({ skill, icons = [] }) => {
               className='flex h-9 w-9 items-center justify-center rounded-xl bg-slate-50 text-lg shadow-xs transition-transform duration-200 hover:z-10 hover:scale-[1.4] motion-reduce:hover:scale-100'
               style={{ color }}
             >
+              {/* Renderiza el componente dinámico y permite que ESLint reconozca su uso. */}
               {createElement(Icon, { 'aria-hidden': true })}
             </span>
           ))}
